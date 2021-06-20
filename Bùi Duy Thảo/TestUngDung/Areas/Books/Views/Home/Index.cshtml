@@ -1,0 +1,255 @@
+﻿@model IEnumerable<ModelEF.ViewModelClone.ProductModel>
+@{
+
+    var cat = (List<ModelEF.Model.Category>)ViewBag.Category;
+    var aut = (List<ModelEF.Model.Author>)ViewBag.Author;
+    var pro_casualAcv = (List<ModelEF.ViewModelClone.ProductModel>)ViewBag.Pro_casualActi;
+    var pro_casualItem = (List<ModelEF.ViewModelClone.ProductModel>)ViewBag.Pro_casualItem; 
+    var pro_tab = (List<ModelEF.ViewModelClone.ProductModel>)ViewBag.Pro_Tab;
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Books/Views/Shared/_Layout.cshtml";
+}
+
+<section id="slider">
+    <!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-sm-6">
+                                <h1><span>BOOK</span>-DAY</h1>
+                                <h2>A Haven for Booklovers</h2>
+                                <p>We sell books (new and second-hand), cards and gifts in our shop in Ennistymon, Co. Clare. </p>
+                                <button type="button" class="btn btn-default get">Bắt đầu ngay</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="~/Assets/client/images/home/bannerb2.jpg" class="girl img-responsive" alt="" />
+                                <img src="~/Assets/client/images/home/pricing.png" class="pricing" alt="" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1><span>BOOK</span>-DAY</h1>
+                                <h2>A Haven for Booklovers</h2>
+                                <p>We sell books (new and second-hand), cards and gifts in our shop in Ennistymon, Co. Clare.. </p>
+                                <button type="button" class="btn btn-default get">Bắt đầu ngay</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="~/Assets/client/images/home/bannerboook.jpg" class="girl img-responsive" alt="" />
+                                <img src="~/Assets/client/images/home/pricing.png" class="pricing" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev" style="transform:translateY(-50%)">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next" style="transform:translateY(-50%)">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Thể loại</h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        @foreach (var item in cat)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">@item.Cat_Name</a></h4>
+                                </div>
+                            </div>
+                        }
+                    </div><!--/category-products-->
+
+                    <div class="brands_products">
+                        <!--brands_products-->
+                        <h2>Tác giả</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                @foreach (var item in aut)
+                                {
+                                    <li><a href="#"> <span class="pull-right">(5)</span>@item.Aut_Name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
+                    <div class="price-range">
+                        <!--price-range-->
+                        <h2>Lọc giá</h2>
+                        <div class="well text-center">
+                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br />
+                            <b class="pull-left">0 VNĐ</b> <b class="pull-right">600 VNĐ</b>
+                        </div>
+                    </div><!--/price-range-->
+
+                    <div class="shipping text-center">
+                        <!--shipping-->
+                        <img src="~/Assets/client/images/home/shipping.jpg" alt="" />
+                    </div><!--/shipping-->
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <!--features_items-->
+                    <h2 class="title text-center">SẢN PHẨM</h2>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="~/Upload/product/@item.ProImg" alt="" />
+                                        <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                        <p>@item.ProName</p>
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                    </div>
+                                    <div class="product-overlay">
+                                        <div class="overlay-content">
+                                            <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                            <p>@item.ProName</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="choose">
+                                    <ul class="nav nav-pills nav-justified">
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>Yêu thích</a></li>
+                                        <li><a href="#"><i class="fa fa-plus-square"></i>So sánh</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div><!--features_items-->
+
+                <div class="category-tab">
+                    <!--category-tab-->
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#banchay" data-toggle="tab">Thơ</a></li>
+                            @foreach (var item in cat)
+                            {
+                                <li><a href="#Cat+@item.Cat_ID" data-toggle="tab">@item.Cat_Name</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="banchay">
+                            @foreach (var item in pro_tab)
+                            {
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Upload/product/@item.ProImg" alt="" />
+                                                <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                                <p>@item.ProName</p>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+
+                        <div class="tab-pane fade" id="Cat+1">
+                            @foreach (var item in pro_tab) { 
+                                <div class="col-sm-3">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="~/Upload/product/@item.ProImg" alt="" />
+                                                <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                                <p>@item.ProName</p>
+                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div><!--/category-tab-->
+
+                <div class="recommended_items">
+                    <!--recommended_items-->
+                    <h2 class="title text-center">SẢN PHẨM BÁN CHẠY</h2>
+
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                               
+                                @foreach (var item in pro_casualAcv)
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="~/Upload/product/@item.ProImg" alt="" />
+                                                    <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                                    <p>@item.ProName</p>
+                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                </div>
+                            <div class="item">
+                               
+                                @foreach (var item in pro_casualItem)
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="~/Upload/product/@item.ProImg" alt="" />
+                                                    <h2>@string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ</h2>
+                                                    <p>@item.ProName</p>
+                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                </div>
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div><!--/recommended_items-->
+
+            </div>
+        </div>
+    </div>
+</section>

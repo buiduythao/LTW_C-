@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ModelEF.ViewModelClone.StatisticalModel>
+
+@{
+    var cat = (List<ModelEF.Model.Category>)ViewBag.Category;
+    var aut = (List<ModelEF.Model.Author>)ViewBag.Author;
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Statistical
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-around">
+            <h5>Thống kê sản phẩm bán được</h5>
+        </div>
+    </div>
+</div>
+<div class="d-flex align-items-center justify-content-around mb-3">
+    <div class="d-flex align-items-center">
+        <label style="white-space:nowrap" class="mr-2">Thể loại sách : </label>
+        <select id="select_Cat_Report" name="Cat_ID" class="custom-select">
+            <option selected value="0">All</option>
+            @foreach (var row_cat in cat)
+            {
+                <option value=@row_cat.Cat_ID>@row_cat.Cat_Name</option>
+            }
+        </select>
+    </div>
+    <div class="d-flex align-items-center">
+        <label style="white-space:nowrap" class="mr-2">Tác giả sách : </label>
+        <select id="select_Aut_Report" name="Aut_ID" class="custom-select">
+            <option selected value="0">All</option>
+            @foreach (var row_aut in aut)
+            {
+                <option value="@row_aut.Aut_ID">@row_aut.Aut_Name</option>
+            }
+        </select>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Tên sách
+            </th>
+            <th>
+                Thể loại
+            </th>
+            <th>
+                Tác giả
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                Đơn giá
+            </th>
+            <th>
+                Tổng số lượng
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="content_report">
+        @{ var i = 1;}
+        @{ decimal? sum = 0;}
+        @foreach (var item in Model)
+        {
+            <tr class="tr_data_report">
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CatName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AutName)
+                </td>
+                <td>
+                    <img style="width:90px;" src="~/Upload/product/@item.ProImg" />
+                </td>
+                <td>
+                    @string.Format("{0:0,0}", item.ProPrice) &nbsp;đ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProQuatity)
+                </td>
+            </tr>
+            i++;
+            sum += @item.ProPrice * @item.ProQuatity;
+        }
+    </tbody>
+    <tfoot id="footer_report">
+        <tr class="tr_footer_report">
+            <td colspan="7" class="text-right"><b>Tổng số tiền bán được : <span style="color:red" class="mx-4">@string.Format("{0:0,0}", @sum) &nbsp;đ</span></b></td>
+        </tr>
+    </tfoot>
+</table>

@@ -1,0 +1,12 @@
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\ModelEF.dll.config
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\ModelEF.dll
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\ModelEF.pdb
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\EntityFramework.dll
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\EntityFramework.SqlServer.dll
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\EntityFramework.xml
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\bin\Debug\EntityFramework.SqlServer.xml
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\obj\Debug\ModelEF.csprojAssemblyReference.cache
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\obj\Debug\ModelEF.csproj.CoreCompileInputs.cache
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\obj\Debug\ModelEF.csproj.CopyComplete
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\obj\Debug\ModelEF.dll
+D:\Thao_IT\Học Kì 220\C#LT\CKBDT\Bùi Duy Thảo\ModelEF\obj\Debug\ModelEF.pdb

@@ -1,0 +1,97 @@
+﻿@model ModelEF.Model.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Product / Create
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-around">
+            <h5>Thêm mới sách</h5>
+            @Html.ActionLink("Quay lại", "Index", "Product", new { @class = "btn btn-info" })
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post,
+        new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Pro_Name, new { @class = "form-control", @placeholder = "Nhập thông tin sách...", required = "required" })
+            @Html.ValidationMessageFor(model => model.Pro_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Img, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Pro_Img, new { @class = "form-control ", @placeholder = "Nhập thông tin sách...", required = "required", @type = "file", @accept = "image/*", @style = "padding:3px;" })
+
+            @Html.ValidationMessageFor(model => model.Pro_Img, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cat_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Cat_ID, null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Cat_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Aut_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Aut_ID, null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Aut_ID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Pro_Price, new { @class = "form-control ", @placeholder = "Nhập thông tin sách...", required = "required" })
+
+            @Html.ValidationMessageFor(model => model.Pro_Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Pro_Quantity, new { @class = "form-control ", @placeholder = "Nhập thông tin sách...", required = "required", @type = "number" })
+
+            @Html.ValidationMessageFor(model => model.Pro_Quantity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Pro_Status, new { @class = "form-control", @placeholder = "Nhập thông tin sách...", required = "required" })
+            @Html.ValidationMessageFor(model => model.Pro_Status, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Pro_Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Pro_Description, new { @class = "form-control", @placeholder = "Nhập thông tin sách...", @id = "txt_product_detail" })
+            @Html.ValidationMessageFor(model => model.Pro_Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Lưu" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+}
+

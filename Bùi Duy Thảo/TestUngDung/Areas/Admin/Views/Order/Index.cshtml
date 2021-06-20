@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ModelEF.ViewModelClone.OrderModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Order
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-around">
+            <h5>Quản lí đơn hàng</h5>
+        </div>
+    </div>
+</div>
+
+</table>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Danh sách đơn hàng
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>Tổng tiền</th>
+                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                        <th>Chú ý</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.OrdID">
+                            <td>@i</td>
+                            <td>
+                                @item.CusName
+                            </td>
+                            <td>
+                                @item.CusAddress
+                            </td>
+                            <td>
+                                @item.OrdTotal VNĐ
+                            </td>
+                            <td>
+                                @item.OrdDate
+                            </td>
+                            <td>
+                                @if (@item.OrdStatus == "0")
+                                {
+                                    <p>Chưa duyệt</p>
+                                }
+                                else
+                                {
+                                    <p>Đã duyệt</p>
+                                }
+
+                            </td>
+                            <td>
+                                @item.OrdDescription
+                            </td>
+                            <td>
+                                <a href=@Url.Action("Index", "OrderDetail", new { id = @item.OrdID }) class="btn btn-info">Chi tiết</a>
+                                &nbsp;
+                                @Ajax.ActionLink("Xóa ", "Delete", new { @id = item.OrdID }, new AjaxOptions
+                                {
+                                    Confirm = "Bạn có chắc chắn muốn xóa không ???",
+                                    OnComplete = "$('#row_" + @item.OrdID + "').remove()",
+                                    HttpMethod = "Delete"
+                                }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

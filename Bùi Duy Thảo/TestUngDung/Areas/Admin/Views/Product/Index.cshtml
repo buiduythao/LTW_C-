@@ -1,0 +1,108 @@
+﻿@model IEnumerable<ModelEF.ViewModelClone.ProductModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Product
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-around">
+            <h5>Quản lí sách</h5>
+            <p>
+                @Html.ActionLink("Tạo mới", "Create", "Product", new { @class = "btn btn-danger" })
+            </p>
+        </div>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Danh sách sản phẩm
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên sách</th>
+                        <th>Hình ảnh</th>
+                        <th>Thể loại</th>
+                        <th>Tác giả</th>
+                        <th>Số lượng</th>
+                        <th>Giá tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ProID">
+                            <td>@i</td>
+                            <td>
+                                @item.ProName
+                            </td>
+                            <td>
+                                <img style="width:70px;" src="~/Upload/product/@item.ProImg" />
+
+                            </td>
+                            <td>
+                                @item.CatName
+                            </td>
+                            <td>
+                                @item.AutName
+                            </td>
+                            <td>
+                                @item.ProQuantity
+                            </td>
+                            <td>
+                                @string.Format("{0:0,0}", @item.ProPrice) &nbsp;đ
+                            </td>
+                            <td>
+                                @item.ProStatus
+                            </td>
+                            <td>
+
+                                <a href=@Url.Action("Edit", "Product", new { id =@item.ProID }) class="btn btn-info mb-2 d-block">Cập nhật <i class="fa fa-edit ml-1"></i></a>
+                                <button class="btn btn-primary mb-2" data-toggle="modal" data-target="#detailProductModel" onclick="DetailProduct(@item.ProID)">Chi tiết</button>
+                                &nbsp;
+                                @Ajax.ActionLink("Xóa ", "Delete", new { @id = item.ProID }, new AjaxOptions
+                                {
+                                    Confirm = "Bạn có chắc chắn muốn xóa không ???",
+                                    OnComplete = "$('#row_" + @item.ProID + "').remove()",
+                                    HttpMethod = "Delete"
+                                }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="detailProductModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modelcontent_ProDetail">
+         
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Bỏ qua</button>
+            </div>
+        </div>
+    </div>
+</div>

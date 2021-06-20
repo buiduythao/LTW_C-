@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ModelEF.Model.Author>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Author
+}
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="d-flex align-items-center justify-content-around">
+            <h5>Quản lí tác giả</h5>
+            <p>
+                @Html.ActionLink("Tạo mới", "Create", "Author", new { @class = "btn btn-danger" })
+            </p>
+        </div>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Danh sách tác giả
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>
+                            Tác Giả
+                        </th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.Aut_ID">
+                            <td>@i</td>
+                            <td>
+                                @item.Aut_Name
+                            </td>
+                            <td>
+                                <a href=@Url.Action("Edit", "Author", new { id = @item.Aut_ID}) class="btn btn-info">Cập nhật <i class="fa fa-edit ml-1"></i></a>
+                                &nbsp;
+                                @Ajax.ActionLink("Xóa ", "Delete", new { @id = item.Aut_ID }, new AjaxOptions
+                                {
+                                    Confirm = "Bạn có chắc chắn muốn xóa không ???",
+                                    OnComplete = "$('#row_" + @item.Aut_ID + "').remove()",
+                                    HttpMethod = "Delete"
+                                }, new { @class = "glyphicon glyphicon-trash btn btn-danger" })
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
